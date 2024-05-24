@@ -1,0 +1,39 @@
+{% extends "skeleton.html" %}
+
+{% block contents %}
+<div class="code-file-container">
+    <div class="code-file-header d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <h1 class="mb-0">{{ code_file.name }} ({{ code_file.language }})</h1>
+            <form action="{{ url_for('code_file.toggle_favorite', safe_code_id=code_file.get_safe_id(srp)) }}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-link p-0 m-0 ml-2" style="background: none; border: none;">
+                    <img src="{{ url_for('static', filename=('favorite.png' if code_file.is_favorite else 'nofavorite.png')) }}" alt="Favorite" class="favorite-icon">
+                </button>
+            </form>
+        </div>
+        <a href="{{ url_for('dashboard') }}">
+            <img src="{{ url_for('static', filename='github-logo-home.png') }}" alt="MoiHub Logo" class="dashboard-logo">
+        </a>
+    </div>
+    <div class="code-file-content mt-4">
+        <pre>{{ code_file.content }}</pre>
+    </div>
+    <div class="comments-section mt-4">
+        <h2>Comentarios</h2>
+        <ul class="list-group">
+            {% for comment in comments %}
+            <li class="list-group-item bg-secondary text-light">
+                <strong>{{ comment.user_email }}:</strong> {{ comment.content }}
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="{{ url_for('code_file.add_comment', safe_code_id=code_file.get_safe_id(srp)) }}" method="post" class="mt-3">
+            <div class="form-group">
+                <label for="content">Añadir un comentario</label>
+                <textarea name="content" id="content" class="form-control form-control-md" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary custom-btn mt-2">Añadir Comentario</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+He intentado utilizar el cloud de google para tener la url de la página web, pero en cuanto al almacenamiento de datos me da muchos problemas.
+Independientemente de eso, el link sería este https://moihubals.ew.r.appspot.com/
+pero agradecería que probases la aplicación en local, porque ahí el espacio de almacenamiento de sirope/redis funciona perfectamente, muchas gracias.
